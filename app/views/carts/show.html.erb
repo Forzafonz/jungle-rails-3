@@ -4,6 +4,13 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if enhanced_cart.length == 0 %>
+    <div class="alert alert-primary" role="alert">No items selected. Please select some items first.</div>
+    <%= link_to :root , class: 'btn btn-primary' do %>
+      Back to Products
+    <% end %>
+
+  <% else %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -48,5 +55,5 @@
       <% end %>
     </div>
   </div>
-
+  <% end %>
 </section>
