@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ProductDetails:", type: :feature do
-
+RSpec.feature "AddToCarts", type: :feature do
   before :each do
     @category = Category.create! name: 'Electronics'
 
@@ -16,18 +15,16 @@ RSpec.feature "ProductDetails:", type: :feature do
     end
   end
 
-  scenario "Product details can be seen by a user:" do
+  scenario "The cart shows 1 after an item(s) added to it" do
 
     visit root_path
-    first('.product-image').click
+    expect(page).to have_content('My Cart (0)')
+
+    first('button.btn').click()
 
     sleep 2
     save_screenshot
 
-    expect(page).to have_no_css('.product-detail')
-    find('.product a.btn-default', match: :first).click
-    expect(page).to have_css('.product-detail')
+    expect(page).to have_content('My Cart (1)')
   end
-
-  
 end
